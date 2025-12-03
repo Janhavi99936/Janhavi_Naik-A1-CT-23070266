@@ -1,84 +1,11 @@
-// STUDENT COURSE MANAGEMNT SYSTEM
-
+Student-Course-Management -System
 
 import java.util.*;
 
-// ABSTRACT CLASS (ABSTRACTION) 
-abstract class Person {
-    protected String name;
-    protected int age;
-
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    abstract void displayDetails(); // Abstract method → Abstraction
-}
-
-// STUDENT CLASS (INHERITANCE + ENCAPSULATION)
-class Student extends Person {
-    private String studentId;
-    private ArrayList<Course> courses = new ArrayList<>(); // COLLECTION
-
-    public Student(String name, int age, String studentId) {
-        super(name, age);
-        this.studentId = studentId;
-    }
-
-    public void enrollCourse(Course c) {
-        courses.add(c);
-    }
-
-    public ArrayList<Course> getCourses() {
-        return courses;
-    }
-
-    @Override
-    void displayDetails() {  // POLYMORPHISM
-        System.out.println("\n--- Student Details ---");
-        System.out.println("ID : " + studentId);
-        System.out.println("Name : " + name);
-        System.out.println("Age : " + age);
-        System.out.println("Courses Enrolled :");
-
-        if (courses.isEmpty()) {
-            System.out.println("No courses enrolled.");
-        } else {
-            for (Course c : courses) {
-                System.out.println(" - " + c.getCourseName());
-            }
-        }
-    }
-}
-
-// COURSE CLASS 
-class Course {
-    private String courseId;
-    private String courseName;
-
-    public Course(String cid, String cname) {
-        this.courseId = cid;
-        this.courseName = cname;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-}
-
-// CUSTOM EXCEPTION 
-class InvalidInputException extends Exception {
-    public InvalidInputException(String msg) {
-        super(msg);
-    }
-}
-
-//  MAIN SYSTEM CLASS
+// MAIN SYSTEM CLASS 
 public class StudentManagementSystem {
     static Scanner sc = new Scanner(System.in);
 
-    // COLLECTIONS
     static HashMap<String, Student> students = new HashMap<>();
     static HashMap<String, Course> courses = new HashMap<>();
 
@@ -87,7 +14,7 @@ public class StudentManagementSystem {
         int choice;
 
         do {
-            System.out.println("\nSTUDENT COURSE MANAGEMENT SYSTEM ");
+            System.out.println("\nSTUDENT COURSE MANAGEMENT SYSTEM");
             System.out.println("1. Add Student");
             System.out.println("2. Add Course");
             System.out.println("3. Enroll Student in Course");
@@ -98,18 +25,28 @@ public class StudentManagementSystem {
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1 -> addStudent();
-                case 2 -> addCourse();
-                case 3 -> enrollStudent();
-                case 4 -> displayStudent();
-                case 5 -> System.out.println("Exiting...");
-                default -> System.out.println("Invalid choice! Try again.");
+                case 1:
+                    addStudent();
+                    break;
+                case 2:
+                    addCourse();
+                    break;
+                case 3:
+                    enrollStudent();
+                    break;
+                case 4:
+                    displayStudent();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Try again.");
             }
 
         } while (choice != 5);
     }
 
-    //  ADD STUDENT
     static void addStudent() {
         try {
             System.out.print("Enter Name: ");
@@ -117,6 +54,7 @@ public class StudentManagementSystem {
 
             System.out.print("Enter Age: ");
             int age = sc.nextInt();
+
             if (age <= 0) {
                 throw new InvalidInputException("Age must be positive!");
             }
@@ -132,7 +70,6 @@ public class StudentManagementSystem {
         }
     }
 
-    //  ADD COURSE
     static void addCourse() {
         System.out.print("Enter Course ID: ");
         String cid = sc.next();
@@ -144,7 +81,6 @@ public class StudentManagementSystem {
         System.out.println("Course added successfully!");
     }
 
-    //  ENROLL STUDENT 
     static void enrollStudent() {
         System.out.print("Enter Student ID: ");
         String sid = sc.next();
@@ -169,7 +105,6 @@ public class StudentManagementSystem {
         System.out.println("Course enrolled successfully!");
     }
 
-    // DISPLAY STUDENT DETAILS 
     static void displayStudent() {
         System.out.print("Enter Student ID: ");
         String sid = sc.next();
@@ -181,3 +116,75 @@ public class StudentManagementSystem {
         }
     }
 }
+
+
+//  ABSTRACT CLASS 
+abstract class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    abstract void displayDetails();
+}
+
+
+//  STUDENT CLASS 
+class Student extends Person {
+    private String studentId;
+    private ArrayList<Course> courses = new ArrayList<>();
+
+    public Student(String name, int age, String studentId) {
+        super(name, age);
+        this.studentId = studentId;
+    }
+
+    public void enrollCourse(Course c) {
+        courses.add(c);
+    }
+
+    @Override
+    void displayDetails() {
+        System.out.println("\n--- Student Details ---");
+        System.out.println("ID : " + studentId);
+        System.out.println("Name : " + name);
+        System.out.println("Age : " + age);
+        System.out.println("Courses Enrolled :");
+
+        if (courses.isEmpty()) {
+            System.out.println("No courses enrolled.");
+        } else {
+            for (Course c : courses) {
+                System.out.println(" - " + c.getCourseName());
+            }
+        }
+    }
+}
+
+
+//  COURSE CLASS 
+class Course {
+    private String cid;
+    private String cname;
+
+    public Course(String cid, String cname) {
+        this.cid = cid;
+        this.cname = cname;
+    }
+
+    public String getCourseName() {
+        return cname;
+    }
+}
+
+
+// CUSTOM EXCEPTION 
+class InvalidInputException extends Exception {
+    public InvalidInputException(String msg) {
+        super(msg);
+    }
+}
+
