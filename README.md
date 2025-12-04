@@ -1,7 +1,11 @@
-Name: Janhavi Naik
-Roll No: 07
-Batch:A1
-Branch:Computer Technology
+Name: Janhavi Naik,
+
+Roll No: 07,
+
+Batch:A1,
+
+Branch:Computer Technology,
+
 Registration no:23070266
 
 
